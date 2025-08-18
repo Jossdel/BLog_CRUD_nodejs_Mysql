@@ -1,0 +1,27 @@
+body{
+    font-family:  'Times New Roman', Times, serif;
+}
+
+
+.titulo{
+    text-align: center;
+}
+.description{
+    
+     text-align: center;
+     margin: 10px;
+     margin-left: -32.6px;
+    
+}
+.hijo_description{
+width: 600;
+}
+.title{
+
+ text-align: center;
+}
+.buttonEnviar{
+text-align: center;
+margin: 20px;
+margin-left: 500px;
+}
