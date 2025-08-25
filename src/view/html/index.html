@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/src/view/css/style.css">
-        <script src="/src/view/elementos.js"></script>
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1 class="titulo">My own Blog</h1>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/view/css/style.css" />
+    <script src="/src/view/elementos.js" defer></script>
+    <title>Blog</title>
+  </head>
+  <body>
+    <div class="contenedor">
+      <h1 class="titulo">My own Blog</h1>
+      <div class="inputs">
         <div class="title">
-            <label
-                name="titulo">Title</label>
-            <input type="text" id="title">
+          <label for="title">Title</label>
+          <input type="text" id="title" />
         </div>
 
         <div class="description">
-
-            <label
-                name="description">Description</label>
-            <input class="hijo_description" type="text"
-                id="description">
+          <label for="description">Description</label>
+          <input class="hijo_description" type="text" id="description" />
         </div>
+      </div>
 
-        <button class="buttonEnviar" id="buttonEnvio"
-            onclick="agregarBlog()">Enviar</button>
-        <div id="blogs"></div>
-    </body>
+      <button class="buttonEnviar" id="buttonEnvio" onclick="agregarBlog()">
+        Enviar
+      </button>
+    </div>
+
+    <!-- 🔹 Aquí se mostrarán los blogs -->
+    <div id="blogs" class="blog-list"></div>
+  </body>
 </html>

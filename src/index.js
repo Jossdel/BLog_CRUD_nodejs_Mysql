@@ -8,12 +8,15 @@ import {
   getRouterId,
   deleteRouterId,
 } from "./routes/user.route.js";
-
-cors();
+const app = express();
+app.use(
+  cors({
+    origin: "http://127.0.0.1:5500",
+  })
+);
 config();
 connectDB();
 
-const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -23,8 +26,8 @@ app.get("/", async (req, res) => {
 });
 //RUTAS
 app.use("/users", getRouter);
-app.use("/users", getRouterId);
-app.use("/users", deleteRouterId);
+app.use("/users/:id", getRouterId);
+app.use("/users/:id", deleteRouterId);
 app.use("/createblogs", postRouter);
 
 //server
