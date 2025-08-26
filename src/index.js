@@ -2,12 +2,7 @@ import express from "express";
 import cors from "cors";
 import { config } from "dotenv";
 import { connectDB } from "./config/dataSource.js";
-import {
-  postRouter,
-  getRouter,
-  getRouterId,
-  deleteRouterId,
-} from "./routes/user.route.js";
+import router from "./routes/user.route.js";
 const app = express();
 app.use(
   cors({
@@ -25,13 +20,10 @@ app.get("/", async (req, res) => {
   res.send("WELCOMEEEE JOSHUAA");
 });
 //RUTAS
-app.use("/users", getRouter);
-app.use("/users/:id", getRouterId);
-app.use("/users/:id", deleteRouterId);
-app.use("/createblogs", postRouter);
+app.use("/", router);
 
 //server
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} `);
 });

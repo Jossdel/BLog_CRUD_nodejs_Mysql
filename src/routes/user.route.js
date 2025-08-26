@@ -6,7 +6,9 @@ import {
   postUser,
 } from "../controllers/user.controller.js";
 let router = Router();
-export const getRouter = router.get("/", getUser);
-export const postRouter = router.post("/", postUser);
-export const getRouterId = router.get("/", getUserId);
-export const deleteRouterId = router.delete("/", deleteUserId);
+router.get("/users", getUser);
+router.post("/createblogs", postUser);
+router.get("/users/:id", getUserId);
+router.delete("/users/:id", deleteUserId);
+
+export default router;

@@ -52,10 +52,23 @@ export const getUserId = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const getIdBlogUser = await blogUser.findOne({ where: { id } });
+    if (!id) {
+      return res.status(400).json({ error: "No se proporcionó ningún id" });
+    }
+
+    const userId = Number(id); // 👈 conversión obligatoria
+
+    // Validamos que realmente sea un número
+    if (isNaN(userId)) {
+      return res.status(400).json({ error: "El id debe ser un número válido" });
+    }
+
+    const getIdBlogUser = await blogUser.findOne({ where: { id: userId } });
 
     if (!getIdBlogUser) {
-      return res.status(404).json({ error: "User not found" });
+      return res
+        .status(404)
+        .json({ error: `No se encontró usuario con id ${id}` });
     }
 
     res.status(200).json({
@@ -104,13 +117,22 @@ export const deleteUserId = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deleteIdBlogUser = await blogUser.delete({ id: Number(id) });
-
-    // delete devuelve { affected: X }, si no borró nada → not found
-    if (deleteIdBlogUser.affected === 0) {
-      return res.status(404).json({ error: "User not found" });
+    // Primero validamos si mandaron un id
+    if (!id) {
+      return res.status(400).json({ message: "No se proporcionó ningún id" });
     }
 
+    // Intentamos eliminar el usuario
+    const result = await blogUser.delete({ id: Number(id) });
+
+    // Si no se eliminó nada (porque no existía el id en DB)
+    if (result.affected === 0) {
+      return res
+        .status(404)
+        .json({ message: `No se encontró usuario con id ${id}` });
+    }
+
+    // Si todo salió bien
     res
       .status(200)
       .json({ message: `User with id ${id} deleted successfully` });
